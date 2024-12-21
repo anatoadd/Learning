@@ -27,7 +27,7 @@ section
     text-align: center;
     font-size: 40px;
     font-weight: bold;
-    margin: 0 0 40px; /*top right bottom leftの順で最後のleftを抜いてもOK*/
+    margin: 0 0 40px 0; /*top right bottom leftの順で最後のleftを抜いてもOK*/
 }
 
 /*
