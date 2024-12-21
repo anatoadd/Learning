@@ -89,3 +89,32 @@ about
     margin: 0;
     text-align: left;
 }
+
+
+.card {
+    padding: 0 10px;
+}
+.card-link {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    position: relative;
+}
+.card-label {
+    position: absolute;
+    background-color: #999;
+    color: #fff;
+    display: block;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+.card-image {}
+.card-info {}
+.card-time {}
+.card-headline {}
+.card-description {}
+
+.avator {}
+.avator-name {}
+.avator-image {}
+.avator-image {}
