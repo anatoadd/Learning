@@ -47,3 +47,45 @@ about
     font-size: 30px;
 }
 /* .about-description {} */
+
+.grid {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+.grid-item {
+    list-style: none;
+}
+.grid-col-4 {}
+.grid-col-2 > .grid-item {
+    with: 50%;
+}
+.grid-col-3 > .grid-item {
+    with: 33.3;
+}
+.grid-col-4 > .grid-item {
+    with: 25%;
+}
+.grid-col-5 > .grid-item {
+    with: 20%;
+}
+
+.feature {
+    text-align: center;
+    padding: 0 15px;
+
+}
+.feature-headline {
+    font-weight: bold;
+    margin: 0 0 20px;
+
+}
+.feature-img {
+    margin: 0 0 20px;
+}
+.feature-description {
+    margin: 0;
+    text-align: left;
+}
