@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+/*
+Base style
+*/
+
+body{
+    font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+    /*Noto sansが読み込まれなかった場合(それぞれのPCで持っているフォントが違うため)の代替え案を列挙している
+    font-family: "Noto Sans JP", serif;
+     +
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+    */
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333
+    }
+
+/*
+section
+*/
+
+.section {
+    padding: 30px 15px;
+}
+.section-headline {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0 0 40px; /*top right bottom leftの順で最後のleftを抜いてもOK*/
+}
+
+/*
+about
+*/
+
+.about {
+    margin: 0;
+    display: flex;
+}
+/* .about-image {} */
+.about-caption {
+    padding-left: 20px;
+}
+.about-headline {
+    margin: 0 0 20px;
+    font-size: 30px;
+}
+/* .about-description {} */
