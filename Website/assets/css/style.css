@@ -16,6 +16,36 @@ body{
     color: #333
     }
 
+    label, input, textarea, select, button {
+        cursor: pointer;
+    }
+    .button {
+        border: 0px;
+    }
+
+    .grid {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .grid-item {
+        list-style: none;
+    }
+    .grid-col-2 > .grid-item {
+        with: 50%;
+    }
+    .grid-col-3 > .grid-item {
+        with: 33.3;
+    }
+    .grid-col-4 > .grid-item {
+        with: 25%;
+    }
+    .grid-col-5 > .grid-item {
+        with: 20%;
+    }
+
 /*
 section
 */
@@ -23,11 +53,18 @@ section
 .section {
     padding: 30px 15px;
 }
+.section.section-secondly {
+    background: hs1(0, 0%, 94%);
+}
 .section-headline {
     text-align: center;
     font-size: 40px;
     font-weight: bold;
     margin: 0 0 40px 0; /*top right bottom leftの順で最後のleftを抜いてもOK*/
+}
+.section-button {
+    margin-top: 40px;
+    text-align: center;
 }
 
 /*
@@ -48,30 +85,7 @@ about
 }
 /* .about-description {} */
 
-.grid {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
-}
-.grid-item {
-    list-style: none;
-}
-.grid-col-4 {}
-.grid-col-2 > .grid-item {
-    with: 50%;
-}
-.grid-col-3 > .grid-item {
-    with: 33.3;
-}
-.grid-col-4 > .grid-item {
-    with: 25%;
-}
-.grid-col-5 > .grid-item {
-    with: 20%;
-}
-
+/* feature */
 .feature {
     text-align: center;
     padding: 0 15px;
@@ -90,7 +104,7 @@ about
     text-align: left;
 }
 
-
+/* card */
 .card {
     padding: 0 10px;
 }
@@ -99,22 +113,108 @@ about
     color: #333;
     text-decoration: none;
     position: relative;
+    transition: background-color .25s;
+}
+.card-link:hover {
+    background-color: #eee;
 }
 .card-label {
     position: absolute;
+    left: 0;
+    top: 0;
     background-color: #999;
     color: #fff;
     display: block;
     padding: 5px 10px;
     font-size: 12px;
 }
-.card-image {}
-.card-info {}
+.card-image {
+    width: 100%;
+    height: auto;
+}
+.card-info {
+    padding: 5px 10px;
+}
 .card-time {}
-.card-headline {}
-.card-description {}
+.card-headline {
+    margin: 0;
+}
+.card-description {
+    margin: 0;
+}
 
-.avator {}
-.avator-name {}
-.avator-image {}
-.avator-image {}
+.avator {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: start;
+    padding: 10px;
+}
+.avator-name {
+    font-weight: bold;
+    padding-left: 15px;
+}
+.avator-image {
+    margin: 0;
+    border-radius: 20%;
+    overflow: hidden;
+}
+
+/* botton */
+.button {
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    background-color: #333;
+    text-align: center;
+    padding: 15px 60px;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px #bbb;
+    transition: box-shadow .25s;
+}
+.botton-hover {
+    box-shadow: 0 0 0 #bbb;
+}
+
+/* .select, .input, .radio, .textarea */
+.select {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-width: 300px;
+}
+.input {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-width: 300px;
+}
+.radio {
+    margin: 0 10px;
+}
+.textarea {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    min-width: 300px;
+    min-height: 100px;
+}
+
+/* form */
+/* .form {} */
+.form-table {
+    margin: 0 auto;
+}
+/*.form-table tr {} */
+.form-table th {
+    padding: 10px;
+    text-align: left;
+}
+.form-table td {
+    padding: 10px;
+}
+.form-button {
+    margin-top: 20px;
+    text-align: center;
+}
