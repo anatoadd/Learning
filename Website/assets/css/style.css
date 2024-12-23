@@ -34,16 +34,16 @@ body{
         list-style: none;
     }
     .grid-col-2 > .grid-item {
-        with: 50%;
+        width: 50%;
     }
     .grid-col-3 > .grid-item {
-        with: 33.3;
+        width: 33.3;
     }
     .grid-col-4 > .grid-item {
-        with: 25%;
+        width: 25%;
     }
     .grid-col-5 > .grid-item {
-        with: 20%;
+        width: 20%;
     }
 
 /*
@@ -85,7 +85,9 @@ about
 }
 /* .about-description {} */
 
-/* feature */
+/*
+feature
+*/
 .feature {
     text-align: center;
     padding: 0 15px;
@@ -104,7 +106,9 @@ about
     text-align: left;
 }
 
-/* card */
+/*
+card
+*/
 .card {
     padding: 0 10px;
 }
@@ -135,7 +139,7 @@ about
 .card-info {
     padding: 5px 10px;
 }
-.card-time {}
+/* .card-time {} */
 .card-headline {
     margin: 0;
 }
@@ -160,7 +164,10 @@ about
     overflow: hidden;
 }
 
-/* botton */
+/*
+botton
+*/
+
 .button {
     display: inline-block;
     color: #fff;
@@ -176,8 +183,13 @@ about
 .botton-hover {
     box-shadow: 0 0 0 #bbb;
 }
+.button.button-submission {
+    background: #92d3ca;
+}
 
-/* .select, .input, .radio, .textarea */
+/*
+.select, .input, .radio, .textarea
+*/
 .select {
     border-radius: 5px;
     padding: 10px;
@@ -201,7 +213,9 @@ about
     min-height: 100px;
 }
 
-/* form */
+/*
+form
+*/
 /* .form {} */
 .form-table {
     margin: 0 auto;
@@ -217,4 +231,53 @@ about
 .form-button {
     margin-top: 20px;
     text-align: center;
+}
+
+/*
+works
+*/
+.works {
+    margin: 40px 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/*
+footer
+*/
+.footer {
+    background-color: #333;
+    color: #fff;
+}
+.footer-map {
+    margin: 0;
+    padding: 40px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer-map > iframe {
+    width: 60%;
+}
+.footer-mapinfo {
+    width: 40%;
+}
+.footer-maplogo {
+    font-size: 25px;
+    font-weight: bold;
+}
+.footer-maplogo > svg {
+    margin-right: 10px;
+}
+.footer-mapaddress {
+    font-style: normal;
+}
+.footer-mapadderess > a {
+    color: #fff;
+}
+.footer-line {
+    border-color: #444;
+}
+.footer-copy {
+    display: block;
 }
