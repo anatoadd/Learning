@@ -54,7 +54,7 @@ section
     padding: 30px 15px;
 }
 .section.section-secondly {
-    background: hs1(0, 0%, 94%);
+    background: hsl(0, 0%, 94%);
 }
 .section-headline {
     text-align: center;
@@ -111,6 +111,8 @@ header
 @media screen and (max-width: 768px){
     .header {
         font-size: 12px;
+    }
+}
 
 /*
 about
