@@ -19,7 +19,7 @@ for digit_tuple in unique_digits:
                     success_for_this_sequence = True
                     break  # 作れる場合は探索を終了
             except ZeroDivisionError:
-                continue  # ゼロ除算をskipするよう設定
+                continue  # ゼロ除算を回避できるよう設定
         if success_for_this_sequence:
             break  # 数列単位で探索終了
     if success_for_this_sequence:
