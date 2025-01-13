@@ -1,54 +1,88 @@
 from itertools import permutations, product
 
-# 数列の全パターン生成 (0000～9999) を辞書順にソート済みリストで保持
-digits = [sorted(f"{i:04}") for i in range(10000)]
-unique_digits = set(tuple(digit) for digit in digits)  # 重複排除
+# 必要なモジュールをインポート
+# permutations: 順列を生成するための関数
+# product: 直積(全ての組み合わせ)を生成するための関数
 
-operators = ['+', '-', '*', '/']  # 演算子リスト
+# 数列の生成と重複排除のための準備
+digits = []  # 0000から9999までの4桁の数字を格納するリスト
+success_map = {}  # 各数列パターンが10を作れるかどうかを記録する辞書
 
-successful_sequences = 0  # 10を作れる数列のカウント
-successful_expressions = []  # 10を作れる式を保存するリスト
-original_successful_count = 0  # 元の10000通りのうち成功した数のカウント
+# 0000から9999までの全ての4桁の数字を生成
+for i in range(10000):
+    try:
+        # 各数字を1桁ずつのリストに変換 (例: 123 → [0,1,2,3])
+        digit_list = [int(d) for d in f"{i:04}"]
+        digits.append(tuple(sorted(digit_list)))  # タプルとして昇順にソートして追加
+    except ValueError:
+        continue
 
-# 元の数列と重複排除後の数列の対応を記録する辞書
-digit_to_unique = {}
-for i, digit in enumerate(digits):
-    digit_tuple = tuple(digit)
-    if digit_tuple not in digit_to_unique:
-        digit_to_unique[digit_tuple] = []
-    digit_to_unique[digit_tuple].append(i)
+# 重複を排除した数列のセットを作成
+unique_digits = set(digits)
 
+# 使用する演算子と計算パターンの定義
+operators = ['+', '-', '*', '/']  # 基本的な四則演算
+patterns = [
+    "{}{}{}{}{}{}{}",      # 例: a+b+c+d
+    "({}{}{}){}{}{}{}", # 例: (a+b+c)+d
+    "{}{}({}{}{}{}{})",   # 例: a+(b+c+d)
+    "({}{}{}{}{}{}{})",   # 例: (a+b+c+d)
+    "({}{}{}){}({}{}{})", # 例: (a+b)+(c+d)
+    "({}{}{})({}{}{}{})", # 例: (a+b)+(c+d)
+    "{}({}{}{}{}{}{})",   # 例: a+(b+c+d)
+]
+
+# 各数列パターンに対して計算を実行
 for digit_tuple in unique_digits:
-    success_for_this_sequence = False  # この数列で10を作れるかを記録
-    for perm in permutations(digit_tuple):  # 並び替え
-        for ops in product(operators, repeat=3):  # 演算子の全パターン
-            # 数式を生成
-            expression = f"{perm[0]}{ops[0]}{perm[1]}{ops[1]}{perm[2]}{ops[2]}{perm[3]}"
-            try:
-                if eval(expression) == 10:  # 10を作れるか判定
-                    success_for_this_sequence = True
-                    successful_expressions.append(expression)  # 成功した式を保存
-                    break  # 作れる場合は探索を終了
-            except ZeroDivisionError:
-                continue  # ゼロ除算を回避できるよう設定
-            except:  # その他の例外をキャッチ
-                continue
-        if success_for_this_sequence:
-            break  # 数列単位で探索終了
-    if success_for_this_sequence:
-        successful_sequences += 1
-        # この重複排除後の数列に対応する元の数列の数をカウント
-        original_successful_count += len(digit_to_unique[digit_tuple])
+    found_ten = False  # 10を作れたかどうかのフラグ
+    # 数字の順列を生成して試行
+    for perm in permutations(digit_tuple):
+        if found_ten:
+            break
+        # 演算子の全ての組み合わせを試行
+        for ops in product(operators, repeat=3):
+            if found_ten:
+                break
+            # 各計算パターンを試行
+            for pattern in patterns:
+                try:
+                    # 数式を組み立てて計算
+                    expression = pattern.format(perm[0], ops[0], perm[1], ops[1], perm[2], ops[2], perm[3])
+                    # eval()の代わりに、演算子を関数として実装
+                    nums = [float(perm[0])]
+                    for i in range(3):
+                        if ops[i] == '+':
+                            nums.append(float(perm[i+1]))
+                        elif ops[i] == '-':
+                            nums.append(-float(perm[i+1]))
+                        elif ops[i] == '*':
+                            nums[-1] *= float(perm[i+1])
+                        elif ops[i] == '/':
+                            nums[-1] /= float(perm[i+1])
+                    result = sum(nums)
+                    # 結果が10に近い場合（浮動小数点の誤差を考慮）
+                    if abs(result - 10) < 1e-10:
+                        success_map[digit_tuple] = True
+                        found_ten = True
+                        break
+                except (ZeroDivisionError, ValueError):
+                    # 0での除算や不正な計算をスキップ
+                    continue
+    # 10を作れなかった場合
+    if not found_ten:
+        success_map[digit_tuple] = False
 
-total_sequences = len(unique_digits)
-success_ratio_unique = successful_sequences / total_sequences
-success_ratio_original = original_successful_count / 10000
+# 結果の集計
+total_sequences = 10000  # 全体の数列数
+# 元の10000通りの中で10を作れる数列の数を計算
+successful_sequences = sum(1 for digit_tuple in digits 
+                         if success_map.get(digit_tuple, False))
 
-# 結果を出力
-print("考慮した重複排除後の数列の数:", total_sequences)
-print("10を作れる重複排除後の数列の数:", successful_sequences)
-print("重複排除後の成功率:", success_ratio_unique)
-print("元の10000通りに対する成功率:", success_ratio_original)
-print("\n成功した式の例(最大10個):")
-for expr in successful_expressions[:10]:  # 最大10個まで表示
-    print(f"{expr} = 10")
+# 重複排除後の成功数を計算
+unique_successful = sum(1 for result in success_map.values() if result)
+
+# 結果の出力
+print(f"重複排除後の数列数: {len(unique_digits)}")
+print(f"重複排除後の10を作れる数列の数: {unique_successful}")
+print(f"元の10000通りの中で10を作れる数列の数: {successful_sequences}")
+print(f"成功率: {successful_sequences / 100}%")
