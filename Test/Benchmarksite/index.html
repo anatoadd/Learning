@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>PC Benchmark Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- サイドバー -->
+        <div class="sidebar">
+            <div class="logo">PC Benchmark Viewer</div>
+            <nav>
+                <ul>
+                    <li><a href="#" data-page="system">システム情報</a></li>
+                    <li><a href="#" data-page="benchmark">ベンチマーク結果</a></li>
+                    <li><a href="#" data-page="compare">比較</a></li>
+                    <li><a href="#" data-page="monitor">モニタリング</a></li>
+                    <li><a href="#" data-page="analysis">分析</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- システム情報 -->
+            <div class="page" id="system-page">
+                <h2>システム情報</h2>
+                <div class="system-grid">
+                    <div class="system-card" id="cpu-info">
+                        <h3>CPU情報</h3>
+                        <div class="info-content"></div>
+                    </div>
+                    <div class="system-card" id="memory-info">
+                        <h3>メモリ情報</h3>
+                        <div class="info-content"></div>
+                    </div>
+                    <div class="system-card" id="gpu-info">
+                        <h3>GPU情報</h3>
+                        <div class="info-content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ベンチマーク結果 -->
+            <div class="page" id="benchmark-page">
+                <h2>ベンチマーク結果</h2>
+                <div class="benchmark-container">
+                    <div class="score-section">
+                        <h3>スコア</h3>
+                        <canvas id="score-chart"></canvas>
+                    </div>
+                    <div class="performance-section">
+                        <h3>パフォーマンス</h3>
+                        <canvas id="performance-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- その他のページコンテンツ -->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
