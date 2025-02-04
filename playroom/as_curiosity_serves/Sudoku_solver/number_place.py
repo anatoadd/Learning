@@ -1,3 +1,5 @@
+# AIにて作成中
+
 import pygame
 import sys
 import random
