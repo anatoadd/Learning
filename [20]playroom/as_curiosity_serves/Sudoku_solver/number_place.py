@@ -18,6 +18,8 @@ pygame.display.set_caption("数独")
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (200, 200, 200)
+BLUE = (0, 0, 255)
+RED = (255, 0, 0)
 
 # フォント設定
 FONT = pygame.font.Font(None, 40)
@@ -30,27 +32,109 @@ def draw_grid():
         pygame.draw.line(SCREEN, BLACK, (i * GRID_SIZE, 0), (i * GRID_SIZE, 540), line_width)
         pygame.draw.line(SCREEN, BLACK, (0, i * GRID_SIZE), (540, i * GRID_SIZE), line_width)
 
-def draw_numbers(board):
+def draw_numbers(board, original_board, selected_cell, invalid_cells):
     """ 数独の数字を描画 """
     for row in range(9):
         for col in range(9):
+            # 選択されたセルの背景を灰色で描画
+            if (row, col) == selected_cell:
+                pygame.draw.rect(SCREEN, GRAY, (col * GRID_SIZE, row * GRID_SIZE, GRID_SIZE, GRID_SIZE))
+            
+            # 無効な数字を赤で表示
+            if (row, col) in invalid_cells:
+                color = RED
+            # 元々あった数字を青で表示
+            elif original_board[row][col] != 0:
+                color = BLUE
+            else:
+                color = BLACK
+
             num = board[row][col]
             if num != 0:
-                text = FONT.render(str(num), True, BLACK)
+                text = FONT.render(str(num), True, color)
                 SCREEN.blit(text, (col * GRID_SIZE + 20, row * GRID_SIZE + 15))
 
+def check_board_validity(board):
+    """ 盤面全体の妥当性をチェック """
+    invalid_cells = set()
+    
+    # 各行をチェック
+    for row in range(9):
+        nums = {}
+        for col in range(9):
+            if board[row][col] != 0:
+                if board[row][col] in nums:
+                    invalid_cells.add((row, col))
+                    invalid_cells.add((row, nums[board[row][col]]))
+                nums[board[row][col]] = col
+
+    # 各列をチェック
+    for col in range(9):
+        nums = {}
+        for row in range(9):
+            if board[row][col] != 0:
+                if board[row][col] in nums:
+                    invalid_cells.add((row, col))
+                    invalid_cells.add((nums[board[row][col]], col))
+                nums[board[row][col]] = row
+
+    # 各3x3ブロックをチェック
+    for block_row in range(3):
+        for block_col in range(3):
+            nums = {}
+            for i in range(3):
+                for j in range(3):
+                    row = block_row * 3 + i
+                    col = block_col * 3 + j
+                    if board[row][col] != 0:
+                        if board[row][col] in nums:
+                            invalid_cells.add((row, col))
+                            prev_row, prev_col = nums[board[row][col]]
+                            invalid_cells.add((prev_row, prev_col))
+                        nums[board[row][col]] = (row, col)
+
+    return invalid_cells
+
 def main():
-    board = [[0] * 9 for _ in range(9)]  # 仮の空の数独盤面
+    # 初期盤面の生成
+    board = [[0] * 9 for _ in range(9)]  # 空の盤面で開始
+    original_board = [row[:] for row in board]
+    
+    selected_cell = None
+    invalid_cells = set()
     running = True
+    
     while running:
         SCREEN.fill(WHITE)
         draw_grid()
-        draw_numbers(board)
+        draw_numbers(board, original_board, selected_cell, invalid_cells)
         pygame.display.flip()
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                col = x // GRID_SIZE
+                row = y // GRID_SIZE
+                if 0 <= row < 9 and 0 <= col < 9:
+                    if original_board[row][col] == 0:  # 元々の数字は変更不可
+                        selected_cell = (row, col)
+            
+            elif event.type == pygame.KEYDOWN and selected_cell:
+                row, col = selected_cell
+                if event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
+                    board[row][col] = 0
+                elif event.unicode.isdigit() and event.unicode != '0':
+                    board[row][col] = int(event.unicode)
+                
+                invalid_cells = check_board_validity(board)
+                
+                # 盤面が完成したかチェック
+                if not invalid_cells and all(all(cell != 0 for cell in row) for row in board):
+                    print("おめでとうございます！パズルが完成しました！")
+                    running = False
     
     pygame.quit()
     sys.exit()
@@ -129,23 +213,3 @@ def print_board(board):
     """ 盤面を表示する """
     for row in board:
         print(" ".join(str(num) if num != 0 else '.' for num in row))
-
-valid_puzzles = []
-invalid_puzzles = []
-while True:
-    sudoku_board = generate_sudoku()
-    difficulty = input("難易度を選択 (beginner/intermediate/advanced/exit): ").strip().lower()
-    if difficulty == "exit":
-        break
-    
-    puzzle = remove_numbers(sudoku_board, difficulty)
-    if solve([row[:] for row in puzzle], count_solutions=True) == 1:
-        valid_puzzles.append(puzzle)
-        print("\n問題 (一意な解あり):")
-        print_board(puzzle)
-    else:
-        invalid_puzzles.append(puzzle)
-        print("\n問題 (複数解あり - 破棄):")
-        continue
-    
-    save_problems(valid_puzzles, invalid_puzzles)
