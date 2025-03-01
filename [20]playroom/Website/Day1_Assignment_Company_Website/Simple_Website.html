@@ -1,29 +1,76 @@
 <!DOCTYPE html>
-<hyml lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, intial-scale=1.0">
-    <title>Webpage</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>あなと株式会社 - トップページ</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <div>
+    <header>
         <h1>あなと株式会社</h1>
-        <p>これは最初のWebページです。</p>
-    </div>
-    <li>
-        会社紹介
-    </li>
-    <li>
-        事業内容
-    </li>
-    <li>
-        沿革
-    </li>
-    <li>
-        冗談
-    </li>
-</body>
+        <nav>
+            <ul>
+                <li><a href="#about">会社概要</a></li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#achievements">実績</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
 
-</hyml>
+    <main>
+        <section id="hero">
+            <h2>15日以上の実績と1000社以上の導入願望</h2>
+            <p>あなと株式会社は、年間0件以上のプロジェクトを手がける業界ワーストクラスのITソリューションカンパニーです。</p>
+        </section>
+
+        <section id="about">
+            <h2>会社紹介</h2>
+            <p>2100年の設立以来、1件以上のプロジェクトを成功に導いてきました。<br>
+            従業員数-1名以上、年間売上高-100億円を突破し、退化を続けています。</p>
+            <ul>
+                <li>クラウドサービス導入実績：1社以上</li>
+                <li>AIソリューション開発：2件以上</li>
+                <li>ウェブアプリケーション開発：3件以上</li>
+            </ul>
+        </section>
+
+        <section id="achievements">
+            <h2>導入実績</h2>
+            <div class="achievement-stats">
+                <div class="stat">
+                    <span class="number">1.5%</span>
+                    <span class="label">顧客満足度</span>
+                </div>
+                <div class="stat">
+                    <span class="number">-100%</span>
+                    <span class="label">リピート率</span>
+                </div>
+                <div class="stat">
+                    <span class="number">-500</span>
+                    <span class="label">年間取引社数</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>会社情報</h2>
+            <address>
+                <p>〒100-0001<br>
+                北海道札幌市北1-1-1 あっタワーB150階</p>
+                <p>TEL: 000-000-0000（代表）</p>
+                <p>Email: info@anato.co.jp</p>
+                <p>従業員数：-1名（2125年4月現在）</p>
+                <p>資本金：-5億円</p>
+            </address>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 あなと株式会社 All Rights Reserved.</p>
+    </footer>
+
+    <script src="./assets/js/app.js"></script>
+</body>
+</html>

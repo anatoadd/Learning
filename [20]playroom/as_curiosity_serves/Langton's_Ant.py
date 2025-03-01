@@ -1,5 +1,6 @@
 import numpy as np
 import tkinter as tk
+from tkinter import ttk
 import time
 
 # 定数の定義
@@ -11,7 +12,7 @@ LEFT = 2
 DOWN = 3
 
 # マップサイズ
-MAP_SIZE = 50  # 大きなマップに変更
+MAP_SIZE = 500
 
 # 初期マップの作成
 grid = np.zeros((MAP_SIZE, MAP_SIZE), dtype=int)
@@ -22,15 +23,57 @@ x, y = MAP_SIZE // 2, MAP_SIZE // 2
 # エージェントの初期方向
 direction = RIGHT
 
+# 動作フラグ
+running = False
+
+# 速度設定
+speed_levels = {
+    1: 180,  # 最遅: 180フレームで1動作
+    2: 165,
+    3: 150, 
+    4: 135,
+    5: 120,
+    6: 90,
+    7: 60,
+    8: 45,
+    9: 35,
+    10: 30  # 最速: 30フレームで1動作
+}
+current_speed = 5  # デフォルト値
+
 # ウィンドウの設定
 window = tk.Tk()
 window.title("Langton's Ant")
+
+# コントロールフレームの作成
+control_frame = ttk.Frame(window)
+control_frame.pack(pady=5)
+
+# スピードコントロールの作成
+speed_label = ttk.Label(control_frame, text="速度:")
+speed_label.pack(side=tk.LEFT, padx=5)
+
+speed_scale = ttk.Scale(control_frame, from_=1, to=10, orient=tk.HORIZONTAL,
+                       length=200)
+speed_scale.set(current_speed)
+speed_scale.pack(side=tk.LEFT, padx=5)
+
+# スタート/ストップボタンの作成
+def toggle_simulation():
+    global running
+    running = not running
+    start_stop_button.config(text="停止" if running else "開始")
+    if running:
+        simulation_loop()  # ループ再開
+
+start_stop_button = ttk.Button(control_frame, text="開始", command=toggle_simulation)
+start_stop_button.pack(side=tk.LEFT, padx=5)
 
 # キャンバスの作成
 canvas_size = 500
 cell_size = canvas_size // MAP_SIZE
 canvas = tk.Canvas(window, width=canvas_size, height=canvas_size, bg='white')
-canvas.pack()
+canvas.pack(pady=5)
 
 def update_grid():
     global x, y, direction
@@ -64,12 +107,17 @@ def update_grid():
                                     (j + 1) * cell_size, (i + 1) * cell_size,
                                     fill=color, outline='gray')
 
-    # ウィンドウを更新
-    window.update()
+def simulation_loop():
+    global current_speed
+    if running:
+        current_speed = int(round(speed_scale.get()))  # スライダーの値を四捨五入して整数に変換
+        current_speed = max(1, min(10, current_speed))  # 範囲外の値を防ぐ
+        delay = speed_levels.get(current_speed, 100)  # 万が一キーがない場合のデフォルト値を100msに設定
+        update_grid()
+        window.after(delay, simulation_loop)  # 適切な整数値を渡す
 
-# メインループ
-while True:
-    update_grid()
-    time.sleep(0.1)  # 動作の間隔を設定
+
+# シミュレーションループの開始
+simulation_loop()
 
 window.mainloop()
