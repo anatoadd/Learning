@@ -12,4 +12,4 @@ video 属性
 2. 動作・状態	autoplay, controls, loop, muted, disabled, checked	次に
 3. ソース・データ	src, href, value, action	中盤
 4. サイズ・表示	width, height, style, alt	後半
-5. イベント系	onclick, onchange	最後に
+5. イベント系	onclick, onchange	最後に 
