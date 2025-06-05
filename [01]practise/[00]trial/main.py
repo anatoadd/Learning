@@ -1,3 +1,4 @@
+# お遊び
 from ui.main_window import run_app
 
 if __name__ == "__main__":
