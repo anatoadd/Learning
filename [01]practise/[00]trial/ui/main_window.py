@@ -8,7 +8,7 @@ def run_app():
         label.config(text=f"結果: {result}")
 
     root = tk.Tk()
-    root.title("Python学習サンドボックス")
+    root.title("Python学習用サンドボックス")
     root.geometry("400x200")
 
     label = tk.Label(root, text="ただの試運転", font=("Arial", 16))
