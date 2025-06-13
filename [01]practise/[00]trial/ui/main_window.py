@@ -11,7 +11,7 @@ def run_app():
     root.title("Python学習用サンドボックス")
     root.geometry("400x200")
 
-    label = tk.Label(root, text="ただの試運転", font=("Arial", 16))
+    label = tk.Label(root, text="試運転", font=("Arial", 16))
     label.pack(pady=20)
 
     button = tk.Button(root, text="ロジック実行", command=on_button_click)
