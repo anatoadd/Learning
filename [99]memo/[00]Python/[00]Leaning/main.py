@@ -16,7 +16,7 @@ if z > 10:
     print("Sum is greater than 10")
 else:
     print("Sum is 10 or less")
-
+print(z)
 # ループ処理
 for i in range(5):
     print("Iteration:", i)
