@@ -1,11 +1,13 @@
 # 基本的なPythonの動作を網羅したサンプルプログラム
 
+import rumdom
+
 # 文字列の表示
 print("Hello, world!")
 
 # 変数の定義と代入
 x = 5
-y = 10
+y = rumdom
 
 # 算術演算
 z = x + y
