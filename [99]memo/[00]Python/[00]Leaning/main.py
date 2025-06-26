@@ -20,7 +20,7 @@ else:
     print("Sum is 10 or less")
 print(z)
 # ループ処理
-for i in range(5):
+for i in range(10):
     print("Iteration:", i)
 
 # リストの操作
