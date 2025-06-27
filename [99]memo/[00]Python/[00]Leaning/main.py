@@ -22,6 +22,7 @@ print(z)
 # ループ処理
 for i in range(10):
     print("Iteration:", i)
+    i += 1
 
 # リストの操作
 my_list = [1, 2, 3, 4, 5]
