@@ -1,5 +1,5 @@
 # 基本的なPythonの動作を網羅したサンプルプログラム
-
+import Tkinter as tk
 import rumdom
 
 # 文字列の表示
@@ -42,3 +42,5 @@ with open("sample.txt", "w") as f:
     f.write("Sample text\n")
 
 print("File 'sample.txt' written successfully.")
+
+
