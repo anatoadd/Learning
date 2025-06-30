@@ -16,6 +16,8 @@ print("Sum:", z)
 # 条件分岐
 if z > 10:
     print("Sum is greater than 10")
+elif z < 7:
+    print("sum is less than 7")
 else:
     print("Sum is 10 or less")
 print(z)
