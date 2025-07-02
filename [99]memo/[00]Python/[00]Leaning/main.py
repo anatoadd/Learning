@@ -12,9 +12,12 @@ y = rumdom
 # 算術演算
 z = x + y
 print("Sum:", z)
+
 a = rumdom
 b = rumdom
+
 num = int(a + b)
+
 print(num)
 
 # 条件分岐
