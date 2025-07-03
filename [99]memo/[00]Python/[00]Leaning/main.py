@@ -25,9 +25,12 @@ if z > 10:
     print("Sum is greater than 10")
 elif z < 7:
     print("sum is less than 7")
+elif z == 9:
+    print("sum is 9")
 else:
     print("Sum is 10 or less")
 print(z)
+
 # ループ処理
 for i in range(10):
     print("Iteration:", i)
