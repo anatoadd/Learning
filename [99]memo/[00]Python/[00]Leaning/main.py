@@ -29,7 +29,9 @@ elif z == 9:
     print("sum is 9")
 else:
     print("Sum is 10 or less")
-print(z)
+print("a is ",a)
+print("b is ",b)
+print("z is ",z)
 
 # ループ処理
 for i in range(10):
