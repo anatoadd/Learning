@@ -50,6 +50,8 @@ for item in my_list:
 def multiply(a, b):
     return a * b
 
+print("a is ",a)
+
 result = multiply(3, 4)
 print("Multiplication result:", result)
 
