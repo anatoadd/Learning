@@ -51,7 +51,8 @@ def multiply(a, b):
     return a * b
 
 print("a is ",a)
-print("b is ",b)print
+print("b is ",b)
+print("z is ",z)
 
 
 
