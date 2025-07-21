@@ -51,7 +51,9 @@ def multiply(a, b):
     return a * b
 
 print("a is ",a)
-print("b is ",b)
+print("b is ",b)print
+
+
 
 result = multiply(3, 4)
 print("Multiplication result:", result)
