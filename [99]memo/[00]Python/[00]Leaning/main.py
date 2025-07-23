@@ -8,7 +8,7 @@ print("Hello, world!")
 # 変数の定義と代入
 x = 5
 y = rumdom
-
+print("x is ",x)
 # 算術演算
 z = x + y
 print("Sum:", z)
