@@ -54,8 +54,6 @@ print("a is ",a)
 print("b is ",b)
 print("z is ",z)
 
-
-
 result = multiply(3, 4)
 print("Multiplication result:", result)
 
