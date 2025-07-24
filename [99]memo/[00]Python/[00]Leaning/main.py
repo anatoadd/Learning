@@ -40,6 +40,11 @@ for i in range(10):
     
 print("range is =",i)
 
+y = 0
+while y < 10:
+    print("y is ",y)
+    y += 1
+
 # リストの操作
 my_list = [1, 2, 3, 4, 5]
 print("List elements:")
@@ -62,5 +67,6 @@ with open("sample.txt", "w") as f:
     f.write("Sample text\n")
 
 print("File 'sample.txt' written successfully.")
+
 
 
