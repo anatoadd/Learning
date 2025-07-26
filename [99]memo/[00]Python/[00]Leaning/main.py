@@ -15,7 +15,6 @@ print("Sum:", z)
 
 a = rumdom
 b = rumdom
-
 num = int(a + b)
 
 print(num)
@@ -67,6 +66,3 @@ with open("sample.txt", "w") as f:
     f.write("Sample text\n")
 
 print("File 'sample.txt' written successfully.")
-
-
-
